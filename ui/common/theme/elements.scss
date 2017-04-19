@@ -1,0 +1,81 @@
+@import './variables';
+@import url($font-roboto-path);
+@import url($font-prompt-path);
+$border-style: 1px solid $gray1-color;
+:global {
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+        min-height: 100%;
+        font-size: 16px !important;
+        font-family: $font-family !important;
+        // background: #4B79A1;
+        // background: -webkit-linear-gradient(to left, #4B79A1, #283E51);
+        // background: linear-gradient(to left, #4B79A1, #283E51);
+    }
+    #app {
+        height: 100%;
+    }
+    .hello-world {
+        color: red;
+    }
+    .container {
+        width: 50%;
+        margin: 0 auto;
+    }
+    // Table
+    .table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        border: $border-style;
+        td,
+        th {
+            border-left: $border-style;
+            border-width: 0 0 0 1px;
+            font-size: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: 0.5rem 1rem;
+        }
+        thead {
+            background-color: $gray2-color;
+            color: $black-color;
+            text-align: left;
+            vertical-align: bottom;
+        }
+    }
+    // Button
+    .button {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        box-sizing: border-box;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        background-color: $gray2-color;
+        color: $dark-gray1-color;
+        border: none;
+    }
+    .form {
+        fielset {
+            margin: 0;
+            padding: 0.35rem 0 0.75rem;
+            border: 0;
+        }
+        input[type='text'],
+        textarea,
+        label {
+            display: block;
+            margin: 0.25rem 0;
+            width: 100%;
+        }
+        .error {
+            color: $red1-color;
+        }
+    }
+}

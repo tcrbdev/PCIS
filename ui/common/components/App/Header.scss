@@ -1,0 +1,230 @@
+@import '../../theme/variables';
+$font-color: #333538;
+.header {
+    background: $dark-gray1-color;
+    width: 100%;
+    height: 48px;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    transition: top .3s;
+    // background: linear-gradient(to left, #4B79A1, #283E51);
+    // background: rgba(3, 3, 3, 0.29);
+    // box-shadow: 0 .7px 3px 0 rgba(0,0,0,0.2);
+    // box-shadow: 0 .7px 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0 2px 0 rgba(148, 148, 148, 0.3);
+    z-index: 1;
+    &__hide {
+        top: -60px;
+    }
+    &__load {
+        background: #03A9F4;
+    }
+    &__active {
+        background: #FFF;
+    }
+    &__container {
+        display: flex;
+    }
+}
+
+.content:after {
+    content: attr(data-date);
+    transition: .2s ease-in-out infinite;
+}
+
+.header-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    & .header-container-left {
+        display: flex;
+    }
+    & .header-container-mid {
+        display: flex;
+        flex-grow: 1;
+    }
+    & .header-container-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+.menu-holizontal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    & > li {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        // margin: 0 5px;
+        width: 48px;
+        color: #FFF !important;
+        cursor: pointer;
+        font-size: 24px;
+    }
+    & > li svg {
+        color: #FFF !important;
+    }
+    & >li:first-child {
+        // background-color: green;
+    }
+    & > li:hover,
+    & > li:hover span {
+        color: #273c53 !important;
+    }
+    & > li:before {
+        content: '';
+        position: absolute;
+        width: 40px;
+        height: 35px;
+        border-radius: 2px;
+        z-index: -1;
+        transition: .2s ease-in-out;
+        transform: scale(0);
+        opacity: 0;
+    }
+    & > li:hover::before {
+        background-color: #FFEB3B;
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.listItem-header {
+    color: #FFF;
+    &:hover,
+    &__active {
+        background-color: $list-header-hover;
+    }
+}
+
+.header-menu {
+    float: left;
+    height: 56px;
+    display: flex;
+    li {
+        width: 50px;
+        height: inherit;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.profile-picture {
+    width: 86px;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 10px;
+    transition: .4s all;
+}
+
+.active {
+    background-color: #1a242e;
+}
+
+.online-status {
+    position: absolute;
+    right: -5px;
+    top: 30px;
+    height: 17px !important;
+    width: 17px !important;
+    color: #CDDC39 !important;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    width: 293px;
+    overflow: hidden;
+}
+
+.profile-detail {
+    // padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.profile-shortcut {
+    flex-direction: row;
+    display: flex;
+}
+
+.profile-shortcut-item {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 45px;
+    cursor: pointer;
+    transition: .1s all;
+    background-color: #2d3e50;
+    &:before {
+        content: '';
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        z-index: 0;
+        position: absolute;
+        opacity: 0;
+        transform: scale(0);
+        transition: .25s ease-in-out;
+        background-color: #9c2929;
+    }
+    &:hover::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+    &:hover > svg,
+    &:hover > .fa {
+        color: #2d3e50 !important;
+    }
+    & svg {
+        // color: #00BCD4 !important;
+        color: #FFF !important;
+    }
+}
+
+.brand {
+    color: $white-color;
+    text-decoration: none;
+}
+
+.menu {
+    float: right;
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    &__item {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    &__link {
+        padding: 1rem;
+        color: $green1-color;
+        text-decoration: none;
+    }
+}

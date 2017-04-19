@@ -1,0 +1,6 @@
+export Pages from './Pages/index'
+export ShowPage from './Pages/Show'
+export NewPage from './Pages/New'
+export LoginForm from './Login'
+export POSPages from './POSPages'
+export CallPages from './CallPages'
