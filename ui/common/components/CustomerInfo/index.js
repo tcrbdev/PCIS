@@ -100,7 +100,7 @@ class CustomerInfo extends Component {
 			console.log(err)
 
 			if (!err) {
-				console.log('Received values of form: ', values);
+				console.log('Received value of form: ', values);
 			}
 		});
 	}
