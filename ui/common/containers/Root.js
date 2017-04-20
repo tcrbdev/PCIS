@@ -11,10 +11,9 @@ import enUS from 'antd/lib/locale-provider/en_US';
 
 export default class App extends Component {
 
-	componentWillMount()
-	{
-		injectTapEventPlugin()
-	}
+  componentWillMount() {
+    injectTapEventPlugin()
+  }
 
   render() {
     const store = configureStore(browserHistory)
