@@ -1,5 +1,6 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { syncHistoryWithStore } from 'react-router-redux'
 import {
   Pages,
@@ -16,7 +17,8 @@ import {
 
 export default (store, history) => {
   return (
-    <Router history={syncHistoryWithStore(history, store)}>
+    <Router
+      history={syncHistoryWithStore(history, store)}>
       <Route path='/' component={App}>
         <IndexRoute component={Home} />
         <route path='pages'>

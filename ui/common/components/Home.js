@@ -334,7 +334,7 @@ class Home extends Component {
           <TableExamplePagination />
         </Segment>
         <Segment inverted color='red'>Red</Segment>
-        <Tables columns={columns} dataSource={data} pagination={pagination} />
+        {/*<Tables columns={columns} dataSource={data} pagination={pagination} />*/}
       </div>
     )
   }

@@ -3,7 +3,7 @@
 var path = require('path');
 var request = require('request');
 var low = require('lowdb');
-var fileAsync = require('lowdb/lib/file-async');
+var fileAsync = require('lowdb/lib/storages/file-async');
 var is = require('./is');
 
 module.exports = function (source, cb) {

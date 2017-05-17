@@ -10,9 +10,6 @@ export default class CallPages extends Component {
     render() {
         const { params: { id } } = this.props
 
-        return (
-            <Segment>
-                <CustomerInfo id={id}/>
-            </Segment>)
+        return (<CustomerInfo id={id} />)
     }
 }
