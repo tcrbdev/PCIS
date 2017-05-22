@@ -12,7 +12,7 @@
   "author": "Lending Branch Front End Developer Team",
   "license": "ISC",
   "devDependencies": {
-    "antd": "^2.10.1",
+    "antd": "^2.8.3",
     "autoprefixer": "^6.5.3",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",

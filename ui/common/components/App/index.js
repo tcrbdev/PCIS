@@ -32,7 +32,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        console.log("Param Did mount app", this.props)
+        // console.log("Param Did mount app", this.props)
         if (false) {
             this.props.router.push('/login')
         }
@@ -127,9 +127,9 @@ class App extends Component {
             }
         }
 
-        console.log(this.props)
-        console.log(pop)
-        console.log(spring(0.8, popConfig))
+        // console.log(this.props)
+        // console.log(pop)
+        // console.log(spring(0.8, popConfig))
 
         // themes.ripple = { color: '#FFF' }
         return (

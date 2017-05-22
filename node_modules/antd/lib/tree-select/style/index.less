@@ -38,10 +38,10 @@
       color: @text-color;
       transition: all 0.3s ease;
       &:hover {
-        background-color: @item-hover-bg;
+        background-color: @primary-1;
       }
       &.@{select-tree-prefix-cls}-node-selected {
-        background-color: @item-active-bg;
+        background-color: @primary-2;
       }
     }
     span {
@@ -86,7 +86,7 @@
           .antTreeSwitcherIcon();
           .ie-rotate(3);
           &:after {
-            transform: rotate(270deg) scale(0.59);
+            transform: rotate(270deg) scale(0.5);
           }
         }
       }

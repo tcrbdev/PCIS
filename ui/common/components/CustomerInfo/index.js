@@ -14,35 +14,23 @@ import {
 	getMasterAppointmentReason
 } from '../../actions/master'
 
-import { Segment, Header, Icon as SemanticIcon, Divider, Label } from 'semantic-ui-react'
-import { Form, Icon, Input, Button, Checkbox, Cascader, Radio, Select, DatePicker, Progress, Row, Col } from 'antd';
-import filter from 'lodash/filter'
-
 import styles from './index.css'
 
-const FormItem = Form.Item
-const RadioButton = Radio.Button
-const RadioGroup = Radio.Group
-const ButtonGroup = Button.Group;
-const RangePicker = DatePicker.RangePicker
-const options = [{
-	value: 'zhejiang',
-	label: 'Zhejiang',
-	isLeaf: false,
-}, {
-	value: 'jiangsu',
-	label: 'Jiangsu',
-	isLeaf: false,
-}];
+import { Form, Icon, Input, Button, Row, Col, Collapse } from 'antd';
+const FormItem = Form.Item;
+const Panel = Collapse.Panel;
+
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+
+const hasErrors = (fieldsError) => {
+	return Object.keys(fieldsError).some(field => fieldsError[field]);
+}
 
 class CustomerInfo extends Component {
-
-	state = {
-		options,
-		req: false,
-		percent: 0,
-		percentStatus: 'red'
-	}
 
 	componentWillMount() {
 		this.props.getMasterProvince()
@@ -59,129 +47,30 @@ class CustomerInfo extends Component {
 	}
 
 	componentDidMount() {
-		console.log("----------------------------------------------------------------------", this.props)
+		console.log("componentDidMount", this.props)
 	}
 
-	onChange = (value, selectedOptions) => {
-		const { setFieldsValue } = this.props.form
-
-		if (selectedOptions.length == 3) {
-
-			const zipcode = selectedOptions[2].code
-			setFieldsValue({ zipcode: zipcode })
-		} else {
-			setFieldsValue({ zipcode: null })
-		}
+	componentWillReceiveProps(props) {
+		console.warn("componentWillReceiveProps")
 	}
 
-	getOptions = () => {
-		const { MASTER_PROVINCE, MASTER_AMPHUR, MASTER_DISTRICT } = this.props
-
-		return MASTER_PROVINCE.map((province, index) => ({
-			value: province.ProvinceCode,
-			label: province.ProvinceNameTH,
-			children: filter(MASTER_AMPHUR, (o) => o.ProvinceCode == province.ProvinceCode)
-				.map((amphur, index) => ({
-					value: amphur.AmphurCode,
-					label: amphur.AmphurNameTH,
-					children: filter(MASTER_DISTRICT, (o) => o.ProvinceCode == province.ProvinceCode && o.AmphurCode == amphur.AmphurCode)
-						.map((district, index) => ({
-							value: district.DistrictCode,
-							label: `${district.DistrictNameTH} (${district.ZipCode})`,
-							code: district.ZipCode
-						}))
-				}))
-		}))
+	shouldComponentUpdate(nextProps) {
+		console.info("shouldComponentUpdate", nextProps)
+		return true;
 	}
 
-	handleSubmit(e) {
+	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.form.validateFields((err, values) => {
-			console.log(err)
-
 			if (!err) {
-				console.log('Received value of form: ', values);
+				console.log('Received values of form: ', values);
 			}
 		});
 	}
 
-	selectTelTypefn = (id) => {
-		const { getFieldDecorator } = this.props.form
-		const Option = Select.Option
-		return getFieldDecorator(id, { initialValue: '089' })
-			(
-			<Select style={{ width: 55 }} >
-				<Option value="02">02</Option>
-				<Option value="089">089</Option>
-				<Option value="091">091</Option>
-			</Select>
-			)
-	}
-
-	increase() {
-		let percent = this.state.percent + 10;
-		if (percent > 100) {
-			percent = 100;
-		}
-		this.setState({ percent });
-		this.setPercentStatus(percent)
-	}
-	decline() {
-		let percent = this.state.percent - 10;
-		if (percent < 0) {
-			percent = 0;
-		}
-		this.setState({ percent });
-		this.setPercentStatus(percent)
-	}
-
-	setPercentStatus(percent) {
-		if (percent <= 35) {
-			this.setState({ percentStatus: 'red' })
-		} else if (percent > 35 && percent < 99) {
-			this.setState({ percentStatus: 'teal' })
-		} else {
-			this.setState({ percentStatus: 'blue' })
-		}
-	}
-
-	getBusinessType() {
-		const { getFieldDecorator } = this.props.form
-
-		let itemsOption = this.props.MASTER_BUSINESS_TYPE.map((item, index) => {
-			return <Select.Option key={item['SysNO']} value={item.BusinessTypeCode}>{item.BusinessTypeName}</Select.Option>
-		})
-
-		return getFieldDecorator('businessType', {})
-			(
-			<Select>
-				{itemsOption}
-			</Select>
-			)
-	}
-
-	getSelectDropDown(value, text, data) {
-		let itemsOption = data.map((item, index) => {
-			return <Select.Option key={index} value={item[value]}>{item[item]}</Select.Option>
-		})
-		return itemsOption
-	}
-
-	componentWillReceiveProps(props) {
-		console.warn("Receive Props")
-	}
-
-	shouldComponentUpdate(props) {
-		console.info("Component Update")
-		return true;
-	}
-
 	render() {
 		const {
-            form: {
-                getFieldDecorator,
-			getFieldValue
-            },
+			form: { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched },
 			MASTER_PROVINCE,
 			MASTER_AMPHUR,
 			MASTER_DISTRICT,
@@ -195,19 +84,19 @@ class CustomerInfo extends Component {
 			MASTER_APPOINTMENT_REASON
         } = this.props
 
-		const formItemLayout = {
-			labelCol: { span: 6 },
-			wrapperCol: { span: 18 },
-			hasFeedback: true
-		}
-
-		const selectTelType = this.selectTelTypefn('aloha')
-		const selectTelType2 = this.selectTelTypefn('aloh2')
+		const userNameError = isFieldTouched('userName') && getFieldError('userName');
+		const passwordError = isFieldTouched('password') && getFieldError('password');
 
 		return (
 			<div>
-
-			</div>)
+				<Row type="flex" justify="space-around">
+					<Col span={8}>
+					</Col>
+					<Col span={12}>
+					</Col>
+				</Row>
+			</div>
+		)
 	}
 }
 
